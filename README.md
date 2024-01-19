@@ -4,7 +4,7 @@ Este proyecto es una API desarrollada con Node.js utilizando TypeScript, Express
 
 ## Requisitos Previos
 
-Asegúrate de tener instalados Node.js y npm en tu entorno de desarrollo. Además, necesitarás una instancia de MongoDB en la nube para la base de datos.
+Asegúrate de tener instalados Node.js y npm en tu entorno de desarrollo.
 
 ## Configuración del Proyecto
 
