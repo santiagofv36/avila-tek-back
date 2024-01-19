@@ -1,16 +1,18 @@
 import express from "express";
 
-import { getUserBySessionToken, getUsers } from "../actions/user-actions";
+import { getUserBySessionToken } from "../actions/user-actions";
 
 export const getAllUsers = async (
   req: express.Request,
-  res: express.Response
+  res: express.Response & {
+    paginatedResults: {
+      next: { page: number; limit: number };
+      previous: { page: number; limit: number };
+    };
+  }
 ) => {
   try {
-    const users = await getUsers();
-    //TODO: Hacer paginación
-
-    return res.status(200).send(users);
+    return res.json(res.paginatedResults);
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal server error");
@@ -22,7 +24,6 @@ export const getCurrentUser = async (
   res: express.Response
 ) => {
   try {
-
     const sessionToken = req.cookies["sessionToken"];
 
     if (!sessionToken) {
@@ -36,7 +37,6 @@ export const getCurrentUser = async (
     }
 
     return res.status(200).send(user);
-
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal server error");

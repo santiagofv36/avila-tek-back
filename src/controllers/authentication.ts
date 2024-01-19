@@ -64,6 +64,13 @@ export const login = async (
   try {
     const { email, password } = req.body;
 
+    const sessionToken = req.cookies["sessionToken"];
+
+    // Si ya existe una cookie de sesión no se puede hacer login
+    if (sessionToken) {
+      return res.status(400).send("There is an active session");
+    }
+
     if (!email || !password) {
       return res.status(400).send("Missing email or password");
     }

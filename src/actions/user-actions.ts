@@ -1,11 +1,5 @@
 import { UserModel } from "../db/user";
 
-/**
- * Obtiene todos los usuarios de la base de datos
- *
- * @returns {Promise<User[]>} Una promesa que resuelve en un arreglo de usuarios
- */
-export const getUsers = () => UserModel.find();
 
 /**
  * Obtiene un usuario por su token de sesión
@@ -24,5 +18,13 @@ export const getUserBySessionToken = (sessionToken: string) =>
  */
 export const createUser = (values: Record<string, any>) =>
   new UserModel(values).save().then((user) => user.toObject());
+
+
+/**
+ * Obtiene un usuario por su email
+ * 
+ * @param {string} email - El email del usuario
+ * @returns {Promise<User | null>} Una promesa que resuelve en un usuario o null
+ */
 
 export const getUserByEmail = (email: string) => UserModel.findOne({ email });

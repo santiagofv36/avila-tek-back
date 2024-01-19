@@ -13,7 +13,7 @@ const MONGO_URL =
 async function start() {
   try {
     const app = express();
-    const port : number = 3000;
+    const port: number = 3000;
 
     app.use(
       cors({
@@ -33,8 +33,7 @@ async function start() {
     await mongoose.connect(MONGO_URL);
 
     // Se importa el router
-    app.use("/", router())
-
+    app.use("/api/", router());
   } catch (e) {
     // En caso de error, ya sea por la conexión a la base de datos o por el servidor, se muestra en consola
     console.log(e);
