@@ -28,7 +28,7 @@ export const authentication = (salt: string, password: string): string => {
 
 /**
  * Funcion de middleware para paginar los resultados de una consulta.
- * 
+ *
  * @template T - El tipo de dato del modelo
  * @param {mongoose.Model<T>} model - El modelo a paginar
  * @returns {Promise<void>} Una promesa que resuelve en void
@@ -40,13 +40,21 @@ export const PaginatedResults = <T>(model: mongoose.Model<T>) => {
     res: express.Response & { paginatedResults: mongoose.Model<T>[] },
     next: express.NextFunction
   ) => {
+    // Se obtienen los parametros de la consulta para la paginación y se asignan valores por defecto en caso de que no se envien
+
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
+
+    // Se calcula el indice inicial y el indice final de los resultados
 
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
+    // Se crea un objeto para guardar los resultados de la consulta
+
     const results: any = {};
+
+    // Se verifica si hay resultados siguientes o anteriores para agregarlos al objeto
 
     if (endIndex < (await model.countDocuments().exec())) {
       results.next = {
@@ -62,9 +70,15 @@ export const PaginatedResults = <T>(model: mongoose.Model<T>) => {
       };
     }
 
+    // Se realiza la consulta con los parametros de paginación
+
     results.results = await model.find().limit(limit).skip(startIndex).exec();
 
+    // Se asignan los resultados a la respuesta
+
     res.paginatedResults = results;
+
+    // Se pasa a la siguiente función
 
     next();
   };

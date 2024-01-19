@@ -137,6 +137,8 @@ export const register = async (
 
     const existingUser = await getUserByEmail(email);
 
+    // Si ya existe el usuario no se puede registrar
+
     if (existingUser) {
       return res.status(400).send("User already exists");
     }
