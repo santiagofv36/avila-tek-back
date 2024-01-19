@@ -21,7 +21,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:3000/api/auth/sign-up",
+				"url": "{{prefix_url}}/api/auth/sign-up",
 				"description": "Endpoint para crear un usuario proporcionando su email y su contraseña"
 			},
 			"response": [
@@ -39,7 +39,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:3000/api/auth/sign-up"
+						"url": "{{prefix_url}}/api/auth/sign-up"
 					},
 					"status": "Created",
 					"code": 201,
@@ -103,7 +103,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:3000/api/auth/sign-up"
+						"url": "{{prefix_url}}/api/auth/sign-up"
 					},
 					"status": "Bad Request",
 					"code": 400,
@@ -169,7 +169,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:3000/api/auth/sign-in",
+				"url": "{{prefix_url}}/api/auth/sign-in",
 				"description": "Endpoint para iniciar sesión con el correo y contraseña y setear la cookie"
 			},
 			"response": [
@@ -187,7 +187,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:3000/api/auth/sign-in"
+						"url": "{{prefix_url}}/api/auth/sign-in"
 					},
 					"status": "OK",
 					"code": 200,
@@ -255,7 +255,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:3000/api/auth/sign-in"
+						"url": "{{prefix_url}}/api/auth/sign-in"
 					},
 					"status": "Bad Request",
 					"code": 400,
@@ -310,9 +310,9 @@
 		{
 			"name": "LogOut",
 			"request": {
-				"method": "GET",
+				"method": "DELETE",
 				"header": [],
-				"url": "http://localhost:3000/api/auth/sign-out",
+				"url": "{{prefix_url}}/api/auth/sign-out",
 				"description": "Endpoint para cerrar la sesión y limpiar la cookie"
 			},
 			"response": [
@@ -321,7 +321,7 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:3000/api/auth/sign-out"
+						"url": "{{prefix_url}}/api/auth/sign-out"
 					},
 					"status": "OK",
 					"code": 200,
@@ -380,7 +380,7 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:3000/api/auth/sign-out"
+						"url": "{{prefix_url}}/api/auth/sign-out"
 					},
 					"status": "Bad Request",
 					"code": 400,
@@ -438,12 +438,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/users?page=1&limit=2",
-					"protocol": "http",
+					"raw": "{{prefix_url}}/api/users?page=1&limit=2",
 					"host": [
-						"localhost"
+						"{{prefix_url}}"
 					],
-					"port": "3000",
 					"path": [
 						"api",
 						"users"
@@ -468,12 +466,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/users",
-							"protocol": "http",
+							"raw": "{{prefix_url}}/api/users",
 							"host": [
-								"localhost"
+								"{{prefix_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"users"
@@ -546,12 +542,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/users?page=1&limit=2",
-							"protocol": "http",
+							"raw": "{{prefix_url}}/api/users?page=1&limit=2",
 							"host": [
-								"localhost"
+								"{{prefix_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"users"
@@ -623,71 +617,16 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:3000/api/user",
+				"url": "{{prefix_url}}/api/user",
 				"description": "Endpoint para obtener el usuario actual basado en la cookie"
 			},
 			"response": [
-				{
-					"name": "No hay sesion activa",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:3000/api/user"
-					},
-					"status": "Bad Request",
-					"code": 400,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Access-Control-Allow-Credentials",
-							"value": "true"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "30"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"1e-4SZyKD/Inf8qMLQ8Hpt8XRbIBEU\""
-						},
-						{
-							"key": "Vary",
-							"value": "Accept-Encoding"
-						},
-						{
-							"key": "Date",
-							"value": "Fri, 19 Jan 2024 20:53:05 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "There is not an active session"
-				},
 				{
 					"name": "Usuario logueado",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:3000/api/user"
+						"url": "{{prefix_url}}/api/user"
 					},
 					"status": "OK",
 					"code": 200,
@@ -736,8 +675,69 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"_id\": \"65aad404d18b16299bc6d43f\",\n    \"email\": \"noah@example.com\",\n    \"__v\": 0\n}"
+				},
+				{
+					"name": "No hay sesion activa",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "{{prefix_url}}/api/user"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "30"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1e-4SZyKD/Inf8qMLQ8Hpt8XRbIBEU\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 Jan 2024 20:53:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "There is not an active session"
 				}
 			]
+		}
+	],
+	"variable": [
+		{
+			"key": "prefix_url",
+			"value": "http://localhost:3000"
 		}
 	]
 }
