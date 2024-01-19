@@ -1,7 +1,54 @@
 import express from "express";
-import { createUser, getUserByEmail } from "../actions/user-actions";
+import {
+  createUser,
+  getUserByEmail,
+  getUserBySessionToken,
+} from "../actions/user-actions";
 import { authentication, random } from "../helpers";
 
+/**
+ * Cierra sesión en la aplicación y elimina la cookie de sesión.
+ *
+ * @param {express.Request} req - Objeto de solicitud de Express.
+ * @param {express.Response} res - Objeto de respuesta de Express.
+ * @returns {express.Response} Una respuesta de Express.
+ */
+export const logout = async (
+  req: express.Request,
+  res: express.Response
+): Promise<express.Response<any, Record<string, any>>> => {
+  try {
+    // Se obtiene la cookie de sesión
+    const sessionToken = req.cookies["sessionToken"];
+
+    // Si no existe la cookie de sesión no se puede hacer logout
+    if (!sessionToken) {
+      return res.status(400).send("There is not an active session");
+    }
+
+    // Se obtiene el usuario por medio del token de sesión
+    const user = await getUserBySessionToken(sessionToken);
+
+    // Si no existe el usuario no se puede hacer logout
+    if (!user) {
+      return res.status(400).send("There is not an active session");
+    }
+
+    // Se elimina el token de sesión del usuario
+    user.authentication.sessionToken = undefined;
+
+    // Se guarda el usuario en la base de datos
+    await user.save();
+
+    // Elimina la cookie de sesión
+    res.clearCookie("sessionToken");
+
+    return res.status(200).send("Logout successful");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+};
 
 /**
  * Inicia sesión en la aplicación y crea una cookie de sesión.
@@ -62,7 +109,6 @@ export const login = async (
     res.status(500).send("Internal server error");
   }
 };
-
 
 /**
  * Registra un usuario en la base de datos.
